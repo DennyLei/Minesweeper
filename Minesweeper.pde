@@ -1,7 +1,7 @@
 import de.bezier.guido.*;
-public final static int NUM_ROWS = 10;
-public final static int NUM_COLS = 10;
-public final static int NUM_MINES = 10;
+public static int NUM_ROWS = 10;
+public static int NUM_COLS = 10;
+public static int NUM_MINES = 10;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> mines = new ArrayList<MSButton>(); //ArrayList of just the minesweeper buttons that are mined
 
@@ -40,8 +40,13 @@ public void draw ()
 }
 public boolean isWon()
 {
-    
-    return false;
+    for(int r=0;r<NUM_ROWS;r++){
+        for(int c=0;c<NUM_COLS;c++){
+            if(!mines.contains(buttons[r][c]) && buttons[r][c].clicked == false)
+                return false;
+        }
+    }
+    return true;
 }
 public void displayLosingMessage()
 {
@@ -64,6 +69,17 @@ public int countMines(int row, int col)
         if(row+r==row&&col+c==col)numMines+=0;
         else if(isValid(row+r,col+c)==true&&mines.contains(buttons[row+r][col+c]))numMines++;}
     return numMines;
+}
+void keyPressed()
+{
+    if(key == 'r') NUM_ROWS++;
+    if(key == 'f' && NUM_ROWS > 2) NUM_ROWS--;
+
+    if(key == 'c') NUM_COLS++;
+    if(key == 'v' && NUM_COLS > 2) NUM_COLS--;
+
+    if(key == 'm') NUM_MINES++;
+    if(key == 'n' && NUM_MINES > 1) NUM_MINES--;
 }
 public class MSButton
 {
