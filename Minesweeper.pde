@@ -38,6 +38,17 @@ public void draw ()
     if(isWon() == true)
         displayWinningMessage();
 }
+public void keyPressed()
+{
+    if(key == 'r') NUM_ROWS++;
+    if(key == 'f' && NUM_ROWS > 2) NUM_ROWS--;
+
+    if(key == 'c') NUM_COLS++;
+    if(key == 'v' && NUM_COLS > 2) NUM_COLS--;
+
+    if(key == 'm') NUM_MINES++;
+    if(key == 'n' && NUM_MINES > 1) NUM_MINES--;
+}
 public boolean isWon()
 {
     for(int r=0;r<NUM_ROWS;r++){
@@ -69,17 +80,6 @@ public int countMines(int row, int col)
         if(row+r==row&&col+c==col)numMines+=0;
         else if(isValid(row+r,col+c)==true&&mines.contains(buttons[row+r][col+c]))numMines++;}
     return numMines;
-}
-void keyPressed()
-{
-    if(key == 'r') NUM_ROWS++;
-    if(key == 'f' && NUM_ROWS > 2) NUM_ROWS--;
-
-    if(key == 'c') NUM_COLS++;
-    if(key == 'v' && NUM_COLS > 2) NUM_COLS--;
-
-    if(key == 'm') NUM_MINES++;
-    if(key == 'n' && NUM_MINES > 1) NUM_MINES--;
 }
 public class MSButton
 {
